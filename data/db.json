@@ -1,0 +1,52 @@
+{
+  "categories": [
+    {
+      "id": "1",
+      "name": "kitchen",
+      "display_name": "kitchen",
+      "description": "Appliances, tools, and amazing cookware for the kitchen."
+    },
+    {
+      "id": "2",
+      "name": "bathroom",
+      "display_name": "bathroom",
+      "description": "Toiletries and other items."
+    },
+    {
+      "id": "3",
+      "name": "electronics",
+      "display_name": "electronics",
+      "description": "The latest technology for utility, productivity, and entertainment."
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "category": "kitchen",
+      "name": "The Baconator Ultra",
+      "display_name": "The Baconator Ultra",
+      "description": "Wake up to the smell of freshly-cooked bacon without burning your feet. Seriously necessary. Bacon!"
+    },
+    {
+      "id": "2",
+      "category": "bathroom",
+      "name": "toothbrush holder",
+      "display_name": "toothbrush holder",
+      "description": "A cool themed toothbrush holder with slots for up to four brushes."
+    },
+    {
+      "id": "3",
+      "category": "electronics",
+      "name": "usb splitter",
+      "display_name": "usb splitter",
+      "description": "Turn one USB port into multiple with this handy splitter and adapter."
+    },
+    {
+      "id": "4",
+      "category": "kitchen",
+      "name": "hard boiled egg maker",
+      "display_name": "hard boiled egg maker",
+      "description": "Cook up to 12 eggs to perfection at once with this heated, timed egg maker."
+    }
+  ]
+}
