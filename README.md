@@ -1,5 +1,7 @@
 # API Server
 
+A simple API server to grow knowledge of HTTP & REST principles.
+
 ### **[Link to Swagger Documentation for API](https://app.swaggerhub.com/apis/alex-whan/API-Server/0.1)**
 
 ## Lab 6 - Dynamic API: Phase I
