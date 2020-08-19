@@ -1,3 +1,5 @@
+'use strict';
+
 const logger = require('../lib/middleware/logger.js');
 
 describe('logger middleware', () => {
