@@ -2,6 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
+const CategoryModel = require('../lib/models/categories/categories-model');
 
 let db = [];
 
