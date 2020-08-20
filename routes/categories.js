@@ -3,54 +3,43 @@
 const express = require('express');
 const router = express.Router();
 const CategoryModel = require('../lib/models/categories/categories-model');
-
-let db = [];
+const category = new CategoryModel();
 
 // Categories Routes
+
+router.post('/categories', postCategories);
+
+function postCategories(req, res, next) {
+  let newCategory = category.create(req.body);
+  res.status(200).json(newCategory);
+}
+
 router.get('/categories', getCategories);
 
 function getCategories(req, res, next) {
-  let count = db.length;
-  let results = db;
-  res.status(200).json({ count, results });
+  let categoriesToGet = category.read();
+  res.status(200).json(categoriesToGet);
 }
 
 router.get('/categories/:id', getOneCategory);
 
 function getOneCategory(req, res, next) {
-  let id = req.params.id;
-  let record = db.filter(record => record.id === parseInt(id));
-  res.status(200).json(record[0]);
-}
-
-router.post('/categories', postCategories);
-
-function postCategories(req, res, next) {
-  let { name } = req.body;
-  let record = { name };
-  record.id = db.length + 1;
-  db.push(record);
-  res.status(200).json(record);
+  let categoryToGet = category.read(req.params.id);
+  res.status(200).json(categoryToGet);
 }
 
 router.put('/categories/:id', putOneCategory);
 
 function putOneCategory(req, res, next) {
-  let idToUpdate = req.params.id;
-  let { name, id } = req.body;
-  let updatedRecord = { name, id };
-  db = db.map(record => {
-    record.id === parseInt(idToUpdate) ? updatedRecord : record;
-  });
-  res.status(200).json(updatedRecord);
+  let categoryToPut = category.update(req.params.id, req.body);
+  res.status(200).json(categoryToPut);
 }
 
 router.delete('/categories/:id', deleteOneCategory);
 
 function deleteOneCategory(req, res, next) {
-  let id = req.params.id;
-  db = db.filter(record => record.id !== parseInt(id));
-  res.status(200).json({});
+  category.delete(req.params.id);
+  res.status(200).send(`You have deleted a category with ID ${req.params.id}`);
 }
 
 module.exports = router;
