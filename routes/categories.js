@@ -32,9 +32,9 @@ function postCategories(req, res, next) {
   res.status(200).json(record);
 }
 
-router.put('/categories/:id', putCategories);
+router.put('/categories/:id', putOneCategory);
 
-function putCategories(req, res, next) {
+function putOneCategory(req, res, next) {
   let idToUpdate = req.params.id;
   let { name, id } = req.body;
   let updatedRecord = { name, id };
