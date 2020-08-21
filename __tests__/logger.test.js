@@ -18,7 +18,6 @@ describe('logger middleware', () => {
 
   it('properly logs some output in the console', () => {
     logger(req, res, next);
-    // Need to ensure it was called WITHOUT arguments
     expect(next).toHaveBeenCalledWith();
   });
 });
