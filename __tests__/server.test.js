@@ -2,15 +2,25 @@
 
 const { server } = require('../lib/server.js');
 const supertest = require('supertest');
+require('./supergoose.js');
 const mockRequest = supertest(server);
 
+let spy = jest.spyOn(console, 'log');
+
+beforeEach(() => {
+  spy.mockReset();
+});
+
 describe('Server tests', () => {
-  it.skip('should respond with 500 on an error', () => {
-    return mockRequest
-      .get('/bad')
-      .then(results => {
-        expect(results.status).toBe(500);
-      })
-      .catch(console.error);
+  it('should respond with 500 on an error on a bad route', () => {
+    return mockRequest.get('/api/v1/bad').then(results => {
+      expect(results.status).toBe(500);
+    });
+  });
+
+  it('should respond with 404 on an error on a nonexistent route', () => {
+    return mockRequest.get('/api/v1/notaroute').then(results => {
+      expect(results.status).toBe(404);
+    });
   });
 });
