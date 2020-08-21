@@ -6,18 +6,16 @@ const category = require('../lib/models/categories/categories-model'); // I thin
 
 // Categories Routes
 
-router.post('/categories', postCategories);
+router.post('/categories', createCategory);
 router.get('/categories', getCategories);
 router.get('/categories/:id', getOneCategory);
-router.put('/categories/:id', putOneCategory);
+router.put('/categories/:id', updateOneCategory);
 router.delete('/categories/:id', deleteOneCategory);
 
-function postCategories(req, res, next) {
-  let newCategory = category.create(req.body);
+async function createCategory(req, res, next) {
+  let newCategory = await category.create(req.body);
   res.status(200).json(newCategory);
 }
-
-// Circular structure to JSON? at getCategories (/Users/alexwhan/Documents/projects/code401/labs/api-server/routes/categories.js:22:19)
 
 async function getCategories(req, res, next) {
   let categoriesToGet = await category.get();
@@ -29,9 +27,9 @@ async function getOneCategory(req, res, next) {
   res.status(200).json(categoryToGet);
 }
 
-async function putOneCategory(req, res, next) {
-  let categoryToPut = await category.update(req.params.id, req.body);
-  res.status(200).json(categoryToPut);
+async function updateOneCategory(req, res, next) {
+  let categoryToUpdate = await category.update(req.params.id, req.body);
+  res.status(200).json(categoryToUpdate);
 }
 
 async function deleteOneCategory(req, res, next) {
