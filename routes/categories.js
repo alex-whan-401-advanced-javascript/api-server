@@ -2,43 +2,40 @@
 
 const express = require('express');
 const router = express.Router();
-const CategoryModel = require('../lib/models/categories/categories-model');
-const category = new CategoryModel();
+const category = require('../lib/models/categories/categories-model'); // I think this is ok - an INSTANCE of a MODEL already at this point since we exported a new instance in the categories-model file
 
 // Categories Routes
 
 router.post('/categories', postCategories);
+router.get('/categories', getCategories);
+router.get('/categories/:id', getOneCategory);
+router.put('/categories/:id', putOneCategory);
+router.delete('/categories/:id', deleteOneCategory);
 
 function postCategories(req, res, next) {
   let newCategory = category.create(req.body);
   res.status(200).json(newCategory);
 }
 
-router.get('/categories', getCategories);
+// Circular structure to JSON? at getCategories (/Users/alexwhan/Documents/projects/code401/labs/api-server/routes/categories.js:22:19)
 
-function getCategories(req, res, next) {
-  let categoriesToGet = category.read();
+async function getCategories(req, res, next) {
+  let categoriesToGet = await category.get();
   res.status(200).json(categoriesToGet);
 }
 
-router.get('/categories/:id', getOneCategory);
-
-function getOneCategory(req, res, next) {
-  let categoryToGet = category.read(req.params.id);
+async function getOneCategory(req, res, next) {
+  let categoryToGet = await category.get(req.params.id);
   res.status(200).json(categoryToGet);
 }
 
-router.put('/categories/:id', putOneCategory);
-
-function putOneCategory(req, res, next) {
-  let categoryToPut = category.update(req.params.id, req.body);
+async function putOneCategory(req, res, next) {
+  let categoryToPut = await category.update(req.params.id, req.body);
   res.status(200).json(categoryToPut);
 }
 
-router.delete('/categories/:id', deleteOneCategory);
-
-function deleteOneCategory(req, res, next) {
-  category.delete(req.params.id);
+async function deleteOneCategory(req, res, next) {
+  await category.delete(req.params.id);
   res.status(200).send(`You have deleted a category with ID ${req.params.id}`);
 }
 

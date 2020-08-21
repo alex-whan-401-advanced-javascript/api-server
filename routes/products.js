@@ -5,6 +5,10 @@ const router = express.Router();
 
 // Product Routes
 router.get('/products', getProducts);
+router.get('/products/:id', getOneProduct);
+router.post('/products', postProducts);
+router.put('/products/:id', putOneProduct);
+router.delete('/products/:id', deleteOneProduct);
 
 function getProducts(req, res, next) {
   let count = db.length;
@@ -12,15 +16,11 @@ function getProducts(req, res, next) {
   res.status(200).json({ count, results });
 }
 
-router.get('/products/:id', getOneProduct);
-
 function getOneProduct(req, res, next) {
   let id = req.params.id;
   let record = db.filter(record => record.id === parseInt(id));
   res.status(200).json(record[0]);
 }
-
-router.post('/products', postProducts);
 
 function postProducts(req, res, next) {
   let { name } = req.body;
@@ -29,8 +29,6 @@ function postProducts(req, res, next) {
   db.push(record);
   res.status(200).json(record);
 }
-
-router.put('/products/:id', putOneProduct);
 
 function putOneProduct(req, res, next) {
   let idToUpdate = req.params.id;
@@ -41,8 +39,6 @@ function putOneProduct(req, res, next) {
   });
   res.status(200).json(updatedRecord);
 }
-
-router.delete('/products/:id', deleteOneProduct);
 
 function deleteOneProduct(req, res, next) {
   let id = req.params.id;
