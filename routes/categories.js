@@ -5,7 +5,6 @@ const router = express.Router();
 const category = require('../lib/models/categories/categories-model'); // I think this is ok - an INSTANCE of a MODEL already at this point since we exported a new instance in the categories-model file
 
 // Categories Routes
-
 router.post('/categories', createCategory);
 router.get('/categories', getCategories);
 router.get('/categories/:id', getOneCategory);
