@@ -2,7 +2,6 @@
 
 const { server } = require('../lib/server.js');
 const supertest = require('supertest');
-require('./supergoose.js');
 const mockRequest = supertest(server);
 
 let spy = jest.spyOn(console, 'log');
@@ -13,7 +12,7 @@ beforeEach(() => {
 
 describe('Server tests', () => {
   it('should respond with 500 on an error on a bad route', () => {
-    return mockRequest.get('/api/v1/bad').then(results => {
+    return mockRequest.get('/bad').then(results => {
       expect(results.status).toBe(500);
     });
   });
