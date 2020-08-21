@@ -4,12 +4,6 @@ const { server } = require('../lib/server.js');
 const supertest = require('supertest');
 const mockRequest = supertest(server);
 
-let spy = jest.spyOn(console, 'log');
-
-beforeEach(() => {
-  spy.mockReset();
-});
-
 describe('Server tests', () => {
   it('should respond with 500 on an error on a bad route', () => {
     return mockRequest.get('/bad').then(results => {
